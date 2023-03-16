@@ -1,28 +1,26 @@
-// import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import HotelName from './components/HotelName';
 
 function App() {
-  // const [hotels, setHotels] = useState([]);
+  const [data, setData] = useState([]);
 
-  // useEffect(() => {
-  //   fetch('api/hotels')
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       setHotels(data);
-  //     });
-  // }, []);
-  const hotels = ['Metropolitan', 'Yalta Ultra Luxury Resort', 'Waldorf'];
+  useEffect(() => {
+    fetch('/hotels')
+      .then((response) => response.json())
+      .then((data) => {
+        setData(data);
+      });
+  }, []);
 
-  // fetch from BE API to get names of hotels as an array, e.g, ["Metropolitan", "Yalta Ultra Luxury Resort", "Waldorf"]
+  if (!data) return;
+
   return (
     <div className="App">
       <h1>HOTELS</h1>
       <div>
-        {hotels.map((hotel) => {
-          return (
-            <HotelName hotel={hotel} />
-          );
-        })}
+        {data.map((hotel) => {
+          return <HotelName hotel={hotel.name} />;
+        })} 
       </div>
     </div>
   );
