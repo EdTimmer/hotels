@@ -3,7 +3,7 @@ import HotelName from './components/HotelName';
 
 function App() {
   const [data, setData] = useState([]);
-
+  // Replace useEffect with Redux toolkit
   useEffect(() => {
     fetch('/hotels')
       .then((response) => response.json())
@@ -15,12 +15,12 @@ function App() {
   if (!data) return;
 
   return (
-    <div className="App">
+    <div className='App'>
       <h1>HOTELS</h1>
       <div>
         {data.map((hotel) => {
           return <HotelName hotel={hotel.name} />;
-        })} 
+        })}
       </div>
     </div>
   );
